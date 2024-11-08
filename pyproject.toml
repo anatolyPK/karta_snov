@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "karta-snow"
+version = "0.1.0"
+description = ""
+authors = ["anatoly <anatolypolyakovd@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+dash = "^2.18.2"
+dash-bootstrap-components = "^1.6.0"
+pandas = "^2.2.3"
+dash-leaflet = "^1.0.15"
+gunicorn = "^23.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
