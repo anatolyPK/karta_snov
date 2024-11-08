@@ -86,11 +86,13 @@ layout = html.Div(
             ),
             className='order-1 col-12 col-md-8'
         ),
-        html.Div([
-            color_mode_switch,
-            control_section],
+        html.Div(
+            [
+                color_mode_switch,
+                control_section
+            ],
             className='order-2 col-6 col-md-4'
         )
     ],
-    className="m-3 p-3 row"
+    className="m-3 row"
 )
