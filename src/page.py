@@ -70,11 +70,10 @@ color_mode_switch = html.Span(
     className='d-flex justify-content-end'
 )
 
-layout = dbc.Row(
+layout = html.Div(
 
     [
-        dbc.Col(width=1),
-        dbc.Col(
+        html.Div(
             dl.Map(
                 center=center,
                 zoom=12,
@@ -85,15 +84,17 @@ layout = dbc.Row(
                 bounds=image_bounds,
                 id='map'
             ),
-            width=12, md=6),
-        dbc.Col([
+            # width=12,
+            # md=6,
+            className='order-1 col-12 col-md-8'
+        ),
+        html.Div([
             color_mode_switch,
             control_section],
-            width=12,
-            md=4,
-            className='h4'
-        ),
-        dbc.Col(width=1)
+            # width=12,
+            # md=4,
+            className='order-2 col-6 col-md-4'
+        )
     ],
-    className="m-3 p-3"
+    className="m-3 p-3 row"
 )
