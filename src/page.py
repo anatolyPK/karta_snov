@@ -84,15 +84,11 @@ layout = html.Div(
                 bounds=image_bounds,
                 id='map'
             ),
-            # width=12,
-            # md=6,
             className='order-1 col-12 col-md-8'
         ),
         html.Div([
             color_mode_switch,
             control_section],
-            # width=12,
-            # md=4,
             className='order-2 col-6 col-md-4'
         )
     ],
