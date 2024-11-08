@@ -85,11 +85,12 @@ layout = dbc.Row(
                 bounds=image_bounds,
                 id='map'
             ),
-            width=6),
+            width=12, md=6),
         dbc.Col([
             color_mode_switch,
             control_section],
-            width=4,
+            width=12,
+            md=4,
             className='h4'
         ),
         dbc.Col(width=1)
