@@ -1,0 +1,17 @@
+.custom-margin {
+    margin: 2%;
+}
+
+.custom-margin-top {
+    margin-top: 2%;
+}
+
+.map-container {
+    height: 93vh;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 50vh;
+    }
+}

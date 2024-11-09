@@ -91,7 +91,8 @@ def calculate_nomenclature(value, dropdown_value):
         except InvalidNomenclature:
             return html.Div('Проверьте введенную номенклатуру', className='mt-3')
         return table
-    return "Введите номенклатуру"
+    return no_update
+
 
 @callback(
     Output("output-target-designation", "children"),
@@ -118,7 +119,8 @@ def get_target_destination(n_click, data, dropdown_value, storage):
             target_destination = calculate_target_destination(
                 Coordinates(**first_point_dict),
                 Coordinates(**second_point_dict),
-                point)
+                point
+            )
             storage['target'] = []
             return target_destination, storage
 

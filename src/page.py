@@ -4,6 +4,7 @@ import dash_leaflet as dl
 
 from src.text import dropdown_text
 
+
 image_path = "assets/Snov_50000_page-0001.jpg"
 image_bounds = [
     [54.6480, 17.99],
@@ -18,9 +19,7 @@ control_section = html.Div(
             ],
             dropdown_text['coordinates'],
             clearable=False,
-            id='dropdown',
-            maxHeight=600,
-            optionHeight=60
+            id='dropdown'
         ),
         dcc.Store(
             id='store',
@@ -30,8 +29,8 @@ control_section = html.Div(
                 'target': []
             }
         ),
-        html.Div(id='output-coordinates', className='mt-2'),
-        html.Div(id='output-distance-and-azimuth', className='mt-2'),
+        html.Div(id='output-coordinates', className='custom-margin-top'),
+        html.Div(id='output-distance-and-azimuth', className='custom-margin-top'),
         html.Div(
             [
                 html.Div(
@@ -40,7 +39,8 @@ control_section = html.Div(
                         dbc.Input(
                             placeholder="Введите номенклатуру",
                             type="text",
-                            id='nomenclature_input'
+                            id='nomenclature_input',
+                            style={'font-size': '1vw'}
                         )
                     ]
                 ),
@@ -49,11 +49,10 @@ control_section = html.Div(
                 )
             ],
             id='output-nomenclature',
-            className='mt-2'
+            className='custom-margin-top'
         ),
-        html.Div(id='output-target-designation', className='mt-2')
-    ],
-    className='mt-3'
+        html.Div(id='output-target-designation', className='custom-margin-top fw-bold')
+    ]
 )
 
 center = [
@@ -67,11 +66,10 @@ color_mode_switch = html.Span(
         dbc.Switch(id="switch", value=True, className="d-inline-block ms-1", persistence=True),
         dbc.Label(className="fa fa-sun", html_for="switch"),
     ],
-    className='d-flex justify-content-end'
+    className='d-flex justify-content-end custom-margin'
 )
 
 layout = html.Div(
-
     [
         html.Div(
             dl.Map(
@@ -80,9 +78,10 @@ layout = html.Div(
                 children=[
                     dl.ImageOverlay(url=image_path, bounds=image_bounds),
                 ],
-                style={'width': '100%', 'height': '93vh'},
+                style={'width': '100%'},
                 bounds=image_bounds,
-                id='map'
+                id='map',
+                className='map-container'
             ),
             className='order-1 col-12 col-md-8'
         ),
@@ -91,8 +90,9 @@ layout = html.Div(
                 color_mode_switch,
                 control_section
             ],
-            className='order-2 col-6 col-md-4'
+            className='order-2 col-12 col-md-4',
+            style={'font-size': '1vw'}
         )
     ],
-    className="m-3 row"
+    className="custom-margin row"
 )
