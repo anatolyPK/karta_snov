@@ -46,7 +46,6 @@ def from_roman(roman: str) -> int:
 
 
 def parse_nomenclature(nomenclature: str):
-    """Функция для разбиения номенклатуры на компоненты."""
     parts = nomenclature.split("-")
     if len(parts) == 3:
         zone, map_number, sub_part = parts
@@ -258,11 +257,23 @@ def calculate_50_000(zone: str, map_number: int, sub_number: int, sub_letter: st
                 'l': (0, -1, 12),
                 'lb': (0, -1, 12)
             })
+        elif sub_number == 1 and sub_letter == 'В':
+            directions.update({
+                'lt': (0, -1, 12),
+                'l': (0, -1, 12),
+                'lb': (0, -1, 24)
+            })
         elif sub_number == 12 and sub_letter == 'Б':
             directions.update({
                 'rt': (1, 1, 133),
                 'r': (0, 1, 1),
                 'rb': (0, 1, 1)
+            })
+        elif sub_number == 12 and sub_letter == 'Г':
+            directions.update({
+                'rt': (0, 1, 1),
+                'r': (0, 1, 1),
+                'rb': (0, 1, 13)
             })
     elif 133 <= sub_number <= 144:
         if sub_letter in ('В', 'Г'):
@@ -272,20 +283,34 @@ def calculate_50_000(zone: str, map_number: int, sub_number: int, sub_letter: st
                 'rb': (-1, 0, sub_number - 132 if sub_letter == 'В' else 131)
             })
         if sub_number == 133 and sub_letter == 'В':
-            directions.update(
-                {'lt': (0, -1, 144),
-                 'l': (0, -1, 144),
-                 'lb': (-1, -1, 12)
-                 })
+            directions.update({
+                'lt': (0, -1, 144),
+                'l': (0, -1, 144),
+                'lb': (-1, -1, 12)
+            })
+        elif sub_number == 133 and sub_letter == 'А':
+            directions.update({
+                'lt': (0, -1, 132),
+                'l': (0, -1, 144),
+                'lb': (0, -1, 144)
+            })
         elif sub_number == 144 and sub_letter == 'Г':
             directions.update({
                 'rt': (0, 1, 133),
                 'r': (0, 1, 133),
                 'rb': (-1, 1, 1)
             })
-    elif ((sub_number % 12 == 1 and sub_letter in ('А', 'В'))
-          or (sub_number == 1 and sub_letter == 'В')
-          or (sub_number == 133 and sub_letter == 'A')):
+        elif sub_number == 144 and sub_letter == 'Б':
+            directions.update({
+                'rt': (0, 1, 121),
+                'r': (0, 1, 133),
+                'rb': (0, 1, 133)
+            })
+    elif (
+            (sub_number % 12 == 1 and sub_letter in ('А', 'В'))
+            or (sub_number == 1 and sub_letter == 'В')
+            or (sub_number == 133 and sub_letter == 'A')
+    ):
         directions.update({
             'lt': (0, -1, sub_number + -1 if sub_letter == 'А' else 11),
             'l': (0, -1, sub_number + 11),
@@ -320,7 +345,6 @@ def get_neighbor_nomenclature(zone: str, map_number: int, sub_number: str, sub_l
     elif sub_number.isdigit() and sub_letter is None:
         return calculate_100_000(zone=zone, map_number=map_number, sub_number=sub_number, sub_letter=sub_letter)
     elif sub_letter:
-        print(sub_number)
         return calculate_50_000(zone=zone, map_number=map_number, sub_number=int(sub_number), sub_letter=sub_letter)
     else:
         raise InvalidNomenclature
@@ -346,7 +370,4 @@ def get_nomenclature_table(main_nomenclature: str):
         html.Tr([html.Td(neighbors['lb']), html.Td(neighbors['b']), html.Td(neighbors['rb'])]),
     ]
 
-    table_body = [html.Tbody(table_rows)]
-
-    return dbc.Table(table_body, bordered=True, className='mt-3')
-
+    return dbc.Table([html.Tbody(table_rows)], bordered=True, className='mt-3')

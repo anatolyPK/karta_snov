@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 8050
 
-CMD ["poetry", "run", "gunicorn", "-w", "2", "-b", "0.0.0.0:8050", "app:server"]
+CMD ["poetry", "run", "gunicorn", "-w", "3", "-b", "0.0.0.0:8050", "app:server"]
