@@ -1,6 +1,7 @@
 from dataclasses import asdict
 
-from dash import callback, Output, Input, html, State, no_update, clientside_callback
+from dash import callback, Output, Input, html, State, clientside_callback
+from dash.exceptions import PreventUpdate
 
 from src.common import Coordinates
 from src.services.coord_converter import get_coordinates
@@ -35,13 +36,12 @@ def update_main_block(value):
     Output("output-distance-and-azimuth", "children"),
     Output('store', 'data', allow_duplicate=True),
     Input('map', 'n_clicks'),
-    Input('dropdown', 'value'),
     State('map', 'clickData'),
     State('dropdown', 'value'),
     State('store', 'data'),
     prevent_initial_call=True
 )
-def find_distance_and_azimuth(n_click, dropdown_value_tmp, data, dropdown_value, storage):
+def find_distance_and_azimuth(n_click, data, dropdown_value, storage):
     if dropdown_value == dropdown_text['dist_and_azimuth'] and n_click:
         point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
 
@@ -64,7 +64,7 @@ def find_distance_and_azimuth(n_click, dropdown_value_tmp, data, dropdown_value,
                 ]
             ), storage
 
-    return "Кликните на первый объект, а затем на второй", no_update
+    raise PreventUpdate
 
 @callback(
     Output('output-coordinates', 'children'),
@@ -76,7 +76,7 @@ def display_coordinates(n_click, data, dropdown_value):
     if n_click is not None and dropdown_value == dropdown_text['coordinates']:
         point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
         return get_coordinates(point)
-    return "Кликните на карту, чтобы получить координаты."
+    raise PreventUpdate
 
 
 @callback(
@@ -91,7 +91,7 @@ def calculate_nomenclature(value, dropdown_value):
         except InvalidNomenclature:
             return html.Div('Проверьте введенную номенклатуру', className='mt-3')
         return table
-    return no_update
+    raise PreventUpdate
 
 
 @callback(
@@ -123,8 +123,7 @@ def get_target_destination(n_click, data, dropdown_value, storage):
             )
             storage['target'] = []
             return target_destination, storage
-
-    return "Кликните на начало условной линии", no_update
+    raise PreventUpdate
 
 
 clientside_callback(

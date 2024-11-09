@@ -29,8 +29,16 @@ control_section = html.Div(
                 'target': []
             }
         ),
-        html.Div(id='output-coordinates', className='custom-margin-top'),
-        html.Div(id='output-distance-and-azimuth', className='custom-margin-top'),
+        html.Div(
+            "Кликните на карту, чтобы получить координаты.",
+            id='output-coordinates',
+            className='custom-margin-top'
+        ),
+        html.Div(
+            "Кликните на первый объект, а затем на второй",
+            id='output-distance-and-azimuth',
+            className='custom-margin-top'
+        ),
         html.Div(
             [
                 html.Div(
@@ -51,7 +59,11 @@ control_section = html.Div(
             id='output-nomenclature',
             className='custom-margin-top'
         ),
-        html.Div(id='output-target-designation', className='custom-margin-top fw-bold')
+        html.Div(
+            "Кликните на начало условной линии",
+            id='output-target-designation',
+            className='custom-margin-top fw-bold'
+        )
     ]
 )
 
