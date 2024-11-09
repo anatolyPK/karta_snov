@@ -9,7 +9,7 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_
 server = app.server
 
 app.layout = layout
-
+# app._favicon =
 app.index_string = '''
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@ app.index_string = '''
         <meta name="keywords" content="карта, Снов, карта Снов, географические координаты, прямоугольные координаты, номенклатура, расстояние, магнитный азимут, целеуказание, интерактивное приложение">
         <meta name="author" content="Борис">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="assets/kompas.png" type="image/png">
+        <link rel="icon" href="assets/kompas.ico" type="image/png">
         {%css%}
     </head>
     <body>
