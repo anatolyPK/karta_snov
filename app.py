@@ -9,11 +9,19 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_
 server = app.server
 
 app.layout = layout
-# app._favicon =
 app.index_string = '''
 <!DOCTYPE html>
 <html>
     <head>
+            <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z51CXJCRKE"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-Z51CXJCRKE');
+        </script>
         {%metas%}
         <title>Карта Снов</title>
         <meta name="description" content="Карта Снов - интерактивное приложение для работы с географическими координатами, измерения расстояний и магнитного азимута на карте Снов, а также определения номенклатуры соседних листов карты.">
