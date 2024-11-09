@@ -10,8 +10,15 @@
     height: 93vh;
 }
 
+.text-size {
+        'font-size': '1vw'
+    }
+
 @media (max-width: 768px) {
     .map-container {
         height: 50vh;
+    }
+    .text-size {
+        font-size: 3vw
     }
 }

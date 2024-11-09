@@ -40,7 +40,7 @@ control_section = html.Div(
                             placeholder="Введите номенклатуру",
                             type="text",
                             id='nomenclature_input',
-                            style={'font-size': '1vw'}
+                            className='text-size'
                         )
                     ]
                 ),
@@ -90,8 +90,7 @@ layout = html.Div(
                 color_mode_switch,
                 control_section
             ],
-            className='order-2 col-12 col-md-4',
-            style={'font-size': '1vw'}
+            className='order-2 col-12 col-md-4 text-size'
         )
     ],
     className="custom-margin row"
