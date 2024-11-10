@@ -58,4 +58,4 @@ def calculate_target_destination(
     perpendicular_distance = get_string_distance(
         perpendicular_distance_geographic(first_point, second_point, third_point)
     )
-    return f'Прямая АВ {dist}, {side.value} {perpendicular_distance}, !НАИМЕНОВАНИЕ ОБЪЕКТА!'
+    return f'Прямая АВ {dist}, {side.value} {perpendicular_distance}, (наименование объекта)'

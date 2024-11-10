@@ -38,7 +38,7 @@ def decimal_to_dms(decimal: float) -> tuple[int, int, int]:
 def convert_to_rectangular_coords(point: Coordinates) -> tuple[str, str]:
     x_rect, y_rect = map(lambda coord: f"{round(coord / 5) * 5:05}",
                          convert_geographical_to_rectangular_coords(point))
-    return x_rect, y_rect
+    return f'{x_rect[:2]} {x_rect[2:]}', f'{y_rect[:2]} {y_rect[2:]}'
 
 
 def get_coordinates(point: Coordinates) -> html.Div:
@@ -56,8 +56,8 @@ def get_coordinates(point: Coordinates) -> html.Div:
             html.Div(f"B={lat_str}"),
             html.Div(f"L={lon_str}"),
             html.Div(html.Strong("Полные прямоугольные координаты объекта:"), className='mt-2'),
-            html.Div(f"Х=60{x_rect}"),
-            html.Div(f"Y=43{y_rect}"),
+            html.Div(f"Х=60 {x_rect}"),
+            html.Div(f"Y=43 {y_rect}"),
             html.Div(html.Strong("Сокращенные прямоугольные координаты объекта:"), className='mt-2'),
             html.Div(f"Х={x_rect}"),
             html.Div(f"Y={y_rect}"),

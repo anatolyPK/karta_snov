@@ -47,6 +47,13 @@ def from_roman(roman: str) -> int:
 
 def parse_nomenclature(nomenclature: str):
     parts = nomenclature.split("-")
+    if (
+            not parts
+            or not parts[0].isalpha()
+            or not ('A' <= parts[0] <= 'Z' or 'a' <= parts[0] <= 'z')
+    ):
+        raise InvalidNomenclature
+
     if len(parts) == 3:
         zone, map_number, sub_part = parts
         return zone, map_number, sub_part, None

@@ -1,5 +1,9 @@
 .custom-margin {
-    margin: 2%;
+    margin: 1%;
+}
+
+.custom-margin-top {
+    margin-top: 2%;
 }
 
 .custom-margin-top {
@@ -7,18 +11,26 @@
 }
 
 .map-container {
-    height: 93vh;
+    height: 90vh;
 }
 
 .text-size {
-        'font-size': '1vw'
-    }
+    font-size: 1vw;
+}
+
+.h1-size {
+    font-size: 2vw;
+}
 
 @media (max-width: 768px) {
     .map-container {
         height: 50vh;
     }
     .text-size {
-        font-size: 3vw
+        font-size: 3vw;
+    }
+
+    .h1-size {
+        font-size: 3vw;
     }
 }

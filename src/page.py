@@ -14,10 +14,9 @@ image_bounds = [
 control_section = html.Div(
     [
         dcc.Dropdown(
-            [
-                *dropdown_text.values()
-            ],
+            [*dropdown_text.values()],
             dropdown_text['coordinates'],
+            style={'color': 'black'},
             clearable=False,
             id='dropdown'
         ),
@@ -83,6 +82,10 @@ color_mode_switch = html.Span(
 
 layout = html.Div(
     [
+        html.H1(
+            'Учебная топографическая карта СНОВ У-34-37-В',
+            className='d-flex justify-content-center text-center h1-size'
+        ),
         html.Div(
             dl.Map(
                 center=center,
@@ -105,5 +108,6 @@ layout = html.Div(
             className='order-2 col-12 col-md-4 text-size'
         )
     ],
-    className="custom-margin row"
+    className="custom-margin row",
+    style={"font-family": "'Roboto', sans-serif"}
 )
