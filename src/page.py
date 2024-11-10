@@ -5,7 +5,7 @@ import dash_leaflet as dl
 from src.text import dropdown_text
 
 
-image_path = "assets/Snov_50000_page-0001.jpg"
+image_path = "assets/Snov_50000.jpg"
 image_bounds = [
     [54.6480, 17.99],
     [54.8458, 18.26]

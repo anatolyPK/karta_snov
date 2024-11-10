@@ -6,7 +6,10 @@ from src.services.distance_and_angle import calculate_distance, EARTH_RADIUS
 
 def get_string_distance(distance: float) -> str:
     first_digit, second_digit = str(round(distance * SM_IN_ONE_METER, 1)).split('.')
-    return f'{digits[first_digit]} и {digits[second_digit]}'
+    try:
+        return f'{digits[first_digit]} и {digits[second_digit]}'
+    except KeyError:
+        return f'{first_digit} и {second_digit}'
 
 
 def calculate_side_of_line(first_point: Coordinates, second_point: Coordinates, third_point: Coordinates) -> Direction:
@@ -55,4 +58,4 @@ def calculate_target_destination(
     perpendicular_distance = get_string_distance(
         perpendicular_distance_geographic(first_point, second_point, third_point)
     )
-    return f'Прямая АБ, {dist}, {side.value}, {perpendicular_distance}'
+    return f'Прямая АВ {dist}, {side.value} {perpendicular_distance}, !НАИМЕНОВАНИЕ ОБЪЕКТА!'

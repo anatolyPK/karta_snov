@@ -52,14 +52,14 @@ def get_coordinates(point: Coordinates) -> html.Div:
 
     return html.Div(
         [
-            html.Div(html.Strong("Географические координаты:")),
-            html.Div(f"B={lat_str} С.Ш."),
-            html.Div(f"L={lon_str} В.Д."),
-            html.Div(html.Strong("Полные прямоугольные координаты:"), className='mt-2'),
-            html.Div(f"x=60{x_rect} м."),
-            html.Div(f"y=43{y_rect} м."),
-            html.Div(html.Strong("Сокращенные прямоугольные координаты:"), className='mt-2'),
-            html.Div(f"x={x_rect} м."),
-            html.Div(f"y={y_rect} м."),
+            html.Div(html.Strong("Географические координаты объекта:")),
+            html.Div(f"B={lat_str}"),
+            html.Div(f"L={lon_str}"),
+            html.Div(html.Strong("Полные прямоугольные координаты объекта:"), className='mt-2'),
+            html.Div(f"Х=60{x_rect}"),
+            html.Div(f"Y=43{y_rect}"),
+            html.Div(html.Strong("Сокращенные прямоугольные координаты объекта:"), className='mt-2'),
+            html.Div(f"Х={x_rect}"),
+            html.Div(f"Y={y_rect}"),
         ]
     )
