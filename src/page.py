@@ -108,35 +108,82 @@ color_mode_switch = html.Span(
     className='d-flex justify-content-end custom-margin'
 )
 
-layout = html.Div(
+footer = html.Div(
     [
-        html.H1(
-            'Учебная топографическая карта СНОВ У-34-37-В',
-            className='d-flex justify-content-center text-center h1-size'
-        ),
-        html.Div(
-            dl.Map(
-                center=center,
-                zoom=12,
-                children=[
-                    dl.ImageOverlay(url=image_path, bounds=image_bounds),
-                ],
-                style={'width': '100%', 'cursor': 'crosshair'},
-                bounds=image_bounds,
-                id='map',
-                className='map-container',
-                attributionControl=False
-            ),
-            className='order-1 col-12 col-md-8'
-        ),
-        html.Div(
+        html.Footer(
             [
-                color_mode_switch,
-                control_section
+                html.Div(
+                    [
+                        html.Span(
+                            "Нашли ошибку? Напишите мне об этом!",
+                            className="mb-3 mb-md-0 text-body-secondary"
+                        )
+                    ],
+                    className='col-md-4 d-flex align-items-center'
+                ),
+                html.Ul(
+                    [
+                        html.Li(
+                            [
+                                html.A(
+                                    [
+                                        html.I(className="fab fa-telegram", style={"font-size": "24px"})
+                                    ],
+                                    className="text-body-secondary",
+                                    href="https://t.me/anatolyPV",
+                                    target="_blank"
+                                )
+                            ],
+                            className="ms-3"
+                        ),
+                        html.Li(className="ms-3", children=[
+                            html.A(className="text-body-secondary", href="mailto:serff09@rambler.ru", children=[
+                                html.I(className="fas fa-envelope", style={"font-size": "24px"})
+                            ])
+                        ])
+                    ],
+                    className="nav col-md-4 justify-content-end list-unstyled d-flex"
+                ),
             ],
-            className='order-2 col-12 col-md-4 text-size'
+            className="d-flex flex-wrap justify-content-between align-items-center custom-padding-top border-top"
         )
     ],
-    className="custom-margin row",
-    style={"fontFamily": "'Roboto', sans-serif"}
+    className="custom-margin text-size"
+)
+
+layout = html.Div(
+    [
+        html.Div(
+            [
+                html.H1(
+                    'Учебная топографическая карта СНОВ У-34-37-В',
+                    className='d-flex justify-content-center text-center h1-size'
+                ),
+                html.Div(
+                    dl.Map(
+                        dl.ImageOverlay(url=image_path, bounds=image_bounds),
+                        center=center,
+                        zoom=12,
+                        style={'width': '100%', 'cursor': 'crosshair'},
+                        bounds=image_bounds,
+                        id='map',
+                        className='map-container',
+                        attributionControl=False
+                    ),
+                    className='order-1 col-12 col-md-8'
+                ),
+                html.Div(
+                    [
+                        color_mode_switch,
+                        control_section
+                    ],
+                    className='order-2 col-12 col-md-4 text-size'
+                )
+            ],
+            className="custom-margin row",
+            style={"fontFamily": "'Roboto', sans-serif"}
+
+        ),
+        footer
+    ]
 )
