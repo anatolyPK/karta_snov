@@ -145,7 +145,7 @@ footer = html.Div(
                     className="nav col-md-4 justify-content-end list-unstyled d-flex"
                 ),
             ],
-            className="d-flex flex-wrap justify-content-between align-items-center custom-padding-top border-top"
+            className="d-flex flex-wrap justify-content-between align-items-center custom-padding-top border-top custom-margin "
         )
     ],
     className="custom-margin text-size"
