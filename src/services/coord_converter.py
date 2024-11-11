@@ -6,10 +6,10 @@ from src.common import Coordinates
 
 def convert_geographical_to_rectangular_coords(point: Coordinates) -> tuple[float, float]:
     geogr_coords = np.array([
-        [54.82464672815769, 18.011738149047737],
-        [54.83130740228322, 18.244740079082476],
-        [54.67264603461943, 18.007958634613473],
-        [54.670179901790334, 18.241498226175356]
+        [54.82463984132302, 18.01175317158699],
+        [54.8313091317266, 18.244739237894517],
+        [54.67267090067531, 18.007958634613473],
+        [54.67016682639327, 18.241535332141414]
     ])
 
     react_coords = np.array([
@@ -56,8 +56,8 @@ def get_coordinates(point: Coordinates) -> html.Div:
             html.Div(f"B={lat_str}"),
             html.Div(f"L={lon_str}"),
             html.Div(html.Strong("Полные прямоугольные координаты объекта:"), className='mt-2'),
-            html.Div(f"Х=60 {x_rect}"),
-            html.Div(f"Y=43 {y_rect}"),
+            html.Div(f"Х=6 0{x_rect}"),
+            html.Div(f"Y=4 3{y_rect}"),
             html.Div(html.Strong("Сокращенные прямоугольные координаты объекта:"), className='mt-2'),
             html.Div(f"Х={x_rect}"),
             html.Div(f"Y={y_rect}"),

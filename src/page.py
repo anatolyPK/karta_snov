@@ -5,7 +5,7 @@ import dash_leaflet as dl
 from src.text import dropdown_text
 
 
-image_path = "assets/Snov_50000.jpg"
+image_path = "assets/Snov_50000.webp"
 image_bounds = [
     [54.6480, 17.99],
     [54.8458, 18.26]
@@ -36,6 +36,30 @@ control_section = html.Div(
         html.Div(
             "Кликните на первый объект, а затем на второй",
             id='output-distance-and-azimuth',
+            className='custom-margin-top'
+        ),
+        html.Div(
+            [
+                html.Div(
+                    [
+                        dbc.Label("Определение магнитного азимута по дирекционному углу"),
+                        dbc.Input(
+                            placeholder="Введите значение ДУ в формате 'ХХ' ('ХХ.ХХ')",
+                            type="text",
+                            id='azimuth_input',
+                            className='text-size'
+                        )
+                    ],
+                    className='custom-margin-top'
+                ),
+                html.Div(id='azimuth-answer', className='custom-margin-top')
+            ],
+            id='output-azimuth',
+            className='custom-margin-top'
+        ),
+        html.Div(
+            "Путь",
+            id='road-scheme',
             className='custom-margin-top'
         ),
         html.Div(
@@ -93,10 +117,11 @@ layout = html.Div(
                 children=[
                     dl.ImageOverlay(url=image_path, bounds=image_bounds),
                 ],
-                style={'width': '100%'},
+                style={'width': '100%', 'cursor': 'crosshair'},
                 bounds=image_bounds,
                 id='map',
-                className='map-container'
+                className='map-container',
+                attributionControl=False
             ),
             className='order-1 col-12 col-md-8'
         ),

@@ -17,14 +17,26 @@ def calculate_distance(first_point: Coordinates, second_point: Coordinates) -> i
     return round(distance / 5) * 5
 
 
-def subtract_angle(initial_angle: float) -> str:
+def subtract_angle(initial_angle: float) -> float:
     total_degrees_to_subtract = SUBTRACT_ANGLE[0] + SUBTRACT_ANGLE[1] / 60
+    return (initial_angle - total_degrees_to_subtract) % 360
 
-    resulting_angle = (initial_angle - total_degrees_to_subtract) % 360
+def extract_degrees_and_minutes(angle: float) -> tuple[int, int]:
+    resulting_degrees = int(angle)
+    remaining_angle = angle - resulting_degrees
 
-    resulting_degrees = int(resulting_angle)
-    resulting_minutes = int((resulting_angle - resulting_degrees) * 60)
+    resulting_minutes = int(abs(remaining_angle) * 60)
+    resulting_seconds = int((abs(remaining_angle) * 3600) % 60)
+    if resulting_seconds >= 30:
+        resulting_minutes += 1
 
+    if resulting_minutes >= 60:
+        resulting_degrees += 1
+        resulting_minutes = 0
+    return resulting_degrees, resulting_minutes
+
+def format_angle_in_str_format(angle: float) -> str:
+    resulting_degrees, resulting_minutes = extract_degrees_and_minutes(angle)
     return f"{resulting_degrees}° {resulting_minutes}'"
 
 def calculate_angle_between_points(first_point: Coordinates, second_point: Coordinates) -> float:
@@ -42,5 +54,6 @@ def calculate_angle_between_points(first_point: Coordinates, second_point: Coord
 
 def calculate_azimuth(first_point: Coordinates, second_point: Coordinates) -> str:
     angle_between_points = calculate_angle_between_points(first_point, second_point)
-    return subtract_angle(angle_between_points)
+    resulting_angle = subtract_angle(angle_between_points)
+    return format_angle_in_str_format(resulting_angle)
 

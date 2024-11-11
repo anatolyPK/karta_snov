@@ -4,10 +4,11 @@ from dash import callback, Output, Input, html, State, clientside_callback
 from dash.exceptions import PreventUpdate
 
 from src.common import Coordinates
+from src.services.azimuth import get_azimuth
 from src.services.coord_converter import get_coordinates
 from src.services.distance_and_angle import calculate_distance, calculate_azimuth
 from src.services.nomenclature_finder import get_nomenclature_table
-from src.exceptions import InvalidNomenclature
+from src.exceptions import InvalidNomenclature, InvalidAngleFormat
 from src.services.target_destination import calculate_target_destination
 from src.text import dropdown_text
 
@@ -17,20 +18,27 @@ from src.text import dropdown_text
     Output('output-distance-and-azimuth', 'style'),
     Output('output-nomenclature', 'style'),
     Output('output-target-designation', 'style'),
+    Output('output-azimuth', 'style'),
+    Output('road-scheme', 'style'),
     Input('dropdown', 'value')
 )
 def update_main_block(value):
-    if value == dropdown_text['coordinates']:
-        return {'display': 'block'}, {'display': 'none'}, {'display': 'none'}, {'display': 'none'}
-    elif value == dropdown_text['dist_and_azimuth']:
-        return {'display': 'none'}, {'display': 'block'}, {'display': 'none'}, {'display': 'none'}
-    elif value == dropdown_text['nomenclature']:
-        return {'display': 'none'}, {'display': 'none'}, {'display': 'block'}, {'display': 'none'}
-    elif value == dropdown_text['target']:
-        return {'display': 'none'}, {'display': 'none'}, {'display': 'none'}, {'display': 'block'}
+    index_map = {
+        dropdown_text['coordinates']: 0,
+        dropdown_text['dist_and_azimuth']: 1,
+        dropdown_text['nomenclature']: 2,
+        dropdown_text['target']: 3,
+        dropdown_text['azimuth']: 4,
+        dropdown_text['road_scheme']: 5
+    }
+    styles = [{'display': 'none'}] * len(index_map)
+
+    if value in index_map:
+        styles[index_map[value]] = {'display': 'block'}
     else:
         raise ValueError('Invalid dropdown value')
 
+    return styles
 
 @callback(
     Output("output-distance-and-azimuth", "children"),
@@ -70,7 +78,8 @@ def find_distance_and_azimuth(n_click, data, dropdown_value, storage):
     Output('output-coordinates', 'children'),
     Input('map', 'n_clicks'),
     State('map', 'clickData'),
-    State('dropdown', 'value')
+    State('dropdown', 'value'),
+    prevent_initial_call=True
 )
 def display_coordinates(n_click, data, dropdown_value):
     if n_click is not None and dropdown_value == dropdown_text['coordinates']:
@@ -82,7 +91,8 @@ def display_coordinates(n_click, data, dropdown_value):
 @callback(
     Output('nomenclature_table', 'children'),
     Input('nomenclature_input', 'value'),
-    State('dropdown', 'value')
+    State('dropdown', 'value'),
+    prevent_initial_call=True
 )
 def calculate_nomenclature(value, dropdown_value):
     if value is not None and dropdown_value == dropdown_text['nomenclature']:
@@ -95,12 +105,33 @@ def calculate_nomenclature(value, dropdown_value):
 
 
 @callback(
+    Output('azimuth-answer', 'children'),
+    Input('azimuth_input', 'value'),
+    State('dropdown', 'value'),
+    prevent_initial_call=True
+)
+def calculate_from_directional_angle(value, dropdown_value):
+    if value is not None and dropdown_value == dropdown_text['azimuth']:
+        try:
+            table = get_azimuth(value)
+        except InvalidAngleFormat:
+            return html.Div(
+                'Проверьте введенный дирекционный угол. Поддерживаемые форматы: '
+                'GG, GG.MM, где GG - градусы, MM - минуты',
+                className='mt-3'
+            )
+        return table
+    raise PreventUpdate
+
+
+@callback(
     Output("output-target-designation", "children"),
     Output('store', 'data'),
     Input('map', 'n_clicks'),
     State('map', 'clickData'),
     State('dropdown', 'value'),
-    State('store', 'data')
+    State('store', 'data'),
+    prevent_initial_call=True
 )
 def get_target_destination(n_click, data, dropdown_value, storage):
     if dropdown_value == dropdown_text['target'] and n_click:
