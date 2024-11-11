@@ -5,10 +5,10 @@ import dash_leaflet as dl
 from src.text import dropdown_text
 
 
-image_path = "assets/Snov_50000.webp"
+image_path = "assets/karta_snov_50000.webp"
 image_bounds = [
-    [54.6480, 17.99],
-    [54.8458, 18.26]
+    [54.6480, 17.9904],
+    [54.8458, 18.25950]
 ]
 
 control_section = html.Div(
