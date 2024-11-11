@@ -357,7 +357,7 @@ def get_neighbor_nomenclature(zone: str, map_number: int, sub_number: str, sub_l
         raise InvalidNomenclature
 
 
-def get_nomenclature_table(main_nomenclature: str):
+def get_nomenclature_table(main_nomenclature: str) -> dbc.Table:
     zone, map_number, sub_part, sub_letter = parse_nomenclature(main_nomenclature)
     try:
         map_number = int(map_number)

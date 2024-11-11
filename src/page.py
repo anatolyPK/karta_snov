@@ -25,7 +25,8 @@ control_section = html.Div(
             storage_type='memory',
             data={
                 'output-distance-and-azimuth': [],
-                'target': []
+                'target': [],
+                'road': []
             }
         ),
         html.Div(
@@ -58,8 +59,11 @@ control_section = html.Div(
             className='custom-margin-top'
         ),
         html.Div(
-            "Путь",
-            id='road-scheme',
+            [
+                html.Div('Последовательно кликайте на точки маршрута', className='custom-margin-top'),
+                html.Div(id='road-scheme-table', className='custom-margin-top')
+            ],
+            id='road-scheme-output',
             className='custom-margin-top'
         ),
         html.Div(
@@ -134,5 +138,5 @@ layout = html.Div(
         )
     ],
     className="custom-margin row",
-    style={"font-family": "'Roboto', sans-serif"}
+    style={"fontFamily": "'Roboto', sans-serif"}
 )

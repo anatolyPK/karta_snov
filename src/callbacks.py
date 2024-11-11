@@ -9,6 +9,7 @@ from src.services.coord_converter import get_coordinates
 from src.services.distance_and_angle import calculate_distance, calculate_azimuth
 from src.services.nomenclature_finder import get_nomenclature_table
 from src.exceptions import InvalidNomenclature, InvalidAngleFormat
+from src.services.road_scheme import get_road_scheme_table
 from src.services.target_destination import calculate_target_destination
 from src.text import dropdown_text
 
@@ -19,7 +20,7 @@ from src.text import dropdown_text
     Output('output-nomenclature', 'style'),
     Output('output-target-designation', 'style'),
     Output('output-azimuth', 'style'),
-    Output('road-scheme', 'style'),
+    Output('road-scheme-output', 'style'),
     Input('dropdown', 'value')
 )
 def update_main_block(value):
@@ -128,12 +129,13 @@ def calculate_from_directional_angle(value, dropdown_value):
     Output("output-target-designation", "children"),
     Output('store', 'data'),
     Input('map', 'n_clicks'),
+    Input('azimuth-answer', 'style'),
     State('map', 'clickData'),
     State('dropdown', 'value'),
     State('store', 'data'),
     prevent_initial_call=True
 )
-def get_target_destination(n_click, data, dropdown_value, storage):
+def get_target_destination(n_click, no_needed, data, dropdown_value, storage):
     if dropdown_value == dropdown_text['target'] and n_click:
         point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
 
@@ -154,6 +156,39 @@ def get_target_destination(n_click, data, dropdown_value, storage):
             )
             storage['target'] = []
             return target_destination, storage
+    raise PreventUpdate
+
+
+@callback(
+    Output("road-scheme-table", "children"),
+    Output('store', 'data', allow_duplicate=True),
+    Input('map', 'n_clicks'),
+    Input('road-scheme-output', 'style'),
+    State('map', 'clickData'),
+    State('dropdown', 'value'),
+    State('store', 'data'),
+    prevent_initial_call=True
+)
+def calculate_road_scheme(n_click, no_need, data, dropdown_value, storage):
+    if dropdown_value == dropdown_text['road_scheme'] and n_click:
+        point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
+        if not storage['road']:
+            point_dict = asdict(point)
+            storage['road'].append(point_dict)
+            return 'Кликните на второй объект', storage
+        elif len(storage['road']) == 1:
+            point_dict = asdict(point)
+            storage['road'].append(point_dict)
+            return 'Кликните на третий объект', storage
+        else:
+            first_point_dict, second_point_dict = storage['road'][0], storage['road'][1]
+            target_scheme_table = get_road_scheme_table(
+                Coordinates(**first_point_dict),
+                Coordinates(**second_point_dict),
+                point
+            )
+            storage['road'] = []
+            return target_scheme_table, storage
     raise PreventUpdate
 
 
