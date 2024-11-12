@@ -13,15 +13,30 @@ app.index_string = '''
 <!DOCTYPE html>
 <html>
     <head>
-            <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z51CXJCRKE"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-Z51CXJCRKE');
-        </script>
-            
+        {%metas%}
+        <title>Карта Снов | Учебная топографическая карта У-34-37-В (СНОВ) 1:50000</title>
+        <meta name="description" content="Карта Снов У-34-37-В - интерактивная карта, позволяющая определять 
+        географические координаты, полные и сокращенные координаты объектов, номенклатуру смежных листов топографической
+        карты, магнитный азимут направления, расстояние между объектами, целеуказание от условной линии на цель.">
+        <meta name="keywords" content="карта, Снов, карта Снов, У-34-37-В, у-34-37-в, географические координаты, 
+        полные прямоугольные координаты, сокращенные прямоугольные координаты, номенклатура, 
+        расстояние, магнитный азимут, целеуказание, интерактивное приложение">
+        <meta name="author" content="Борис">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="assets/kompas.ico" type="image/png">
+        {%css%}
+        
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+               
                 <!-- Yandex.Metrika counter -->
         <script type="text/javascript" >
            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -38,30 +53,6 @@ app.index_string = '''
         </script>
         <noscript><div><img src="https://mc.yandex.ru/watch/98878756" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
-
-        {%metas%}
-        <title>Карта Снов | Учебная топографическая карта У-34-37-В (СНОВ) 1:50000</title>
-        <meta name="description" content="Карта Снов У-34-37-В - интерактивная карта, позволяющая определять 
-        географические координаты, полные и сокращенные координаты объектов, номенклатуру смежных листов топографической
-        карты, магнитный азимут направления, расстояние между объектами, целеуказание от условной линии на цель.">
-        <meta name="keywords" content="карта, Снов, карта Снов, У-34-37-В, у-34-37-в, географические координаты, 
-        полные прямоугольные координаты, сокращенные прямоугольные координаты, номенклатура, 
-        расстояние, магнитный азимут, целеуказание, интерактивное приложение">
-        <meta name="author" content="Борис">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="assets/kompas.ico" type="image/png">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-        {%css%}
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
-    <body>
-        {%app_entry%}
-        <footer>
-            {%config%}
-            {%scripts%}
-            {%renderer%}
-        </footer>
     </body>
 </html>
 '''

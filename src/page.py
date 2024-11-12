@@ -181,8 +181,6 @@ layout = html.Div(
                 )
             ],
             className="custom-margin row",
-            style={"fontFamily": "'Roboto', sans-serif"}
-
         ),
         footer
     ]
