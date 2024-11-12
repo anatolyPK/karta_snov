@@ -11,7 +11,7 @@ server = app.server
 app.layout = layout
 app.index_string = '''
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         {%metas%}
         <title>Карта Снов | Учебная топографическая карта У-34-37-В (СНОВ) 1:50000</title>
