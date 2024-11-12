@@ -116,7 +116,7 @@ footer = html.Div(
                     [
                         html.Span(
                             "Нашли ошибку? Напишите мне об этом!",
-                            className="mb-3 mb-md-0 text-body-secondary"
+                            className="mb-3 mb-md-0 text-body-secondary align-items-center"
                         )
                     ],
                     className='col-md-4 d-flex align-items-center'
@@ -127,7 +127,7 @@ footer = html.Div(
                             [
                                 html.A(
                                     [
-                                        html.I(className="fab fa-telegram", style={"font-size": "24px"})
+                                        html.I(className="fab fa-telegram footer-i-size")
                                     ],
                                     className="text-body-secondary",
                                     href="https://t.me/votetalal",
@@ -138,14 +138,15 @@ footer = html.Div(
                         ),
                         html.Li(className="ms-3", children=[
                             html.A(className="text-body-secondary", href="mailto:serff09@rambler.ru", children=[
-                                html.I(className="fas fa-envelope", style={"font-size": "24px"})
+                                html.I(className="fas fa-envelope footer-i-size")
                             ])
                         ])
                     ],
                     className="nav col-md-4 justify-content-end list-unstyled d-flex"
                 ),
             ],
-            className="d-flex flex-wrap justify-content-between align-items-center custom-padding-top border-top custom-margin "
+            className="d-flex flex-wrap justify-content-between align-items-center custom-padding-top border-top "
+                      "custom-margin-footer"
         )
     ],
     className="custom-margin text-size"

@@ -6,9 +6,15 @@ body {
     margin: 1%;
 }
 
+.custom-margin-footer {
+    margin: 2%;
+    margin-top: 8%;
+}
+
 .custom-margin-top {
     margin-top: 2%;
 }
+
 .custom-padding-top {
     padding-top: 1%;
 }
@@ -23,6 +29,10 @@ body {
 
 .text-size {
     font-size: 1vw;
+}
+
+.footer-i-size {
+    font-size: 3vw
 }
 
 .h1-size {
