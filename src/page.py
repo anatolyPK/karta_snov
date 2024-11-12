@@ -130,7 +130,7 @@ footer = html.Div(
                                         html.I(className="fab fa-telegram", style={"font-size": "24px"})
                                     ],
                                     className="text-body-secondary",
-                                    href="https://t.me/anatolyPV",
+                                    href="https://t.me/votetalal",
                                     target="_blank"
                                 )
                             ],
