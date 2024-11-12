@@ -17,8 +17,6 @@ def get_road_scheme_table(first_point: Coordinates, second_point: Coordinates, t
         (calculate_distance(point1, point2), calculate_azimuth(point1, point2)) for point1, point2 in point_pairs
     ]
 
-    print(point_pairs)
-
     table_rows = []
     for road_name, (distance, azimuth) in zip(point_names, distances_and_azimuths):
         table_rows.append(html.Tr([
