@@ -129,13 +129,12 @@ def calculate_from_directional_angle(value, dropdown_value):
     Output("output-target-designation", "children"),
     Output('store', 'data'),
     Input('map', 'n_clicks'),
-    Input('azimuth-answer', 'style'),
     State('map', 'clickData'),
     State('dropdown', 'value'),
     State('store', 'data'),
     prevent_initial_call=True
 )
-def get_target_destination(n_click, no_needed, data, dropdown_value, storage):
+def get_target_destination(n_click, data, dropdown_value, storage):
     if dropdown_value == dropdown_text['target'] and n_click:
         point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
 
@@ -163,14 +162,14 @@ def get_target_destination(n_click, no_needed, data, dropdown_value, storage):
     Output("road-scheme-table", "children"),
     Output('store', 'data', allow_duplicate=True),
     Input('map', 'n_clicks'),
-    Input('road-scheme-output', 'style'),
+    Input('no_need', 'style'),
     State('map', 'clickData'),
     State('dropdown', 'value'),
     State('store', 'data'),
     prevent_initial_call=True
 )
 def calculate_road_scheme(n_click, no_need, data, dropdown_value, storage):
-    if dropdown_value == dropdown_text['road_scheme'] and n_click:
+    if dropdown_value == dropdown_text['road_scheme'] and n_click is not None:
         point = Coordinates(latitude=data['latlng']['lat'], longitude=data['latlng']['lng'])
         if not storage['road']:
             point_dict = asdict(point)

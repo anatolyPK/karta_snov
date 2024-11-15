@@ -100,7 +100,7 @@ center = [
     (image_bounds[0][1] + image_bounds[1][1]) / 2
 ]
 
-choose_task = html.H2('Выберите задание:', className='text-size-h-2 custom-margin-top')
+choose_task = html.H2('Выберите задание:', className='text-size-h-2 custom-margin-top', id='no_need')
 
 color_mode_switch = html.Span(
     [
