@@ -31,8 +31,12 @@ body {
     font-size: 1vw;
 }
 
+.text-size-h-2 {
+    font-size: 2vw;
+}
+
 .footer-i-size {
-    font-size: 2vw
+    font-size: 2vw;
 }
 
 .h1-size {
@@ -52,6 +56,10 @@ body {
     }
 
     .footer-i-size {
-       font-size: 3vw
+       font-size: 3vw;
+    }
+
+    .text-size-h-2 {
+        font-size: 3vw;
     }
 }

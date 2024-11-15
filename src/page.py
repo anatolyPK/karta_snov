@@ -35,7 +35,8 @@ control_section = html.Div(
             className='custom-margin-top'
         ),
         html.Div(
-            "Кликните на первый объект, а затем на второй",
+            "Кликните на первый объект, а затем на второй для нахождения расстояния и магнитного азимиута между "
+            "двумя объектами",
             id='output-distance-and-azimuth',
             className='custom-margin-top'
         ),
@@ -45,7 +46,7 @@ control_section = html.Div(
                     [
                         dbc.Label("Определение магнитного азимута по дирекционному углу"),
                         dbc.Input(
-                            placeholder="Введите значение ДУ в формате 'ХХ' ('ХХ.ХХ')",
+                            placeholder="Введите значение ДУ",
                             type="text",
                             id='azimuth_input',
                             className='text-size'
@@ -70,7 +71,7 @@ control_section = html.Div(
             [
                 html.Div(
                     [
-                        dbc.Label("Номенклатура карты"),
+                        dbc.Label("Поддерживаются следующие масштабы: 1:500000, 1:200000, 1:100000, 1:50000"),
                         dbc.Input(
                             placeholder="Введите номенклатуру",
                             type="text",
@@ -99,6 +100,8 @@ center = [
     (image_bounds[0][1] + image_bounds[1][1]) / 2
 ]
 
+choose_task = html.H2('Выберите задание:', className='text-size-h-2 custom-margin-top')
+
 color_mode_switch = html.Span(
     [
         dbc.Label(className="fa fa-moon", html_for="switch"),
@@ -121,6 +124,7 @@ footer = html.Div(
                     ],
                     className='col-md-4 d-flex align-items-center'
                 ),
+                color_mode_switch,
                 html.Ul(
                     [
                         html.Li(
@@ -175,7 +179,7 @@ layout = html.Div(
                 ),
                 html.Div(
                     [
-                        color_mode_switch,
+                        choose_task,
                         control_section
                     ],
                     className='order-2 col-12 col-md-4 text-size'
