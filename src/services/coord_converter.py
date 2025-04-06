@@ -36,10 +36,55 @@ def decimal_to_dms(decimal: float) -> tuple[int, int, int]:
 
 
 def convert_to_rectangular_coords(point: Coordinates) -> tuple[str, str]:
-    x_rect, y_rect = map(lambda coord: f"{round(coord / 5) * 5:05}",
-                         convert_geographical_to_rectangular_coords(point))
+    x_rect, y_rect = map(
+        lambda coord: f"{round(coord / 5) * 5:05}",
+        convert_geographical_to_rectangular_coords(point)
+    )
     return f'{x_rect[:2]} {x_rect[2:]}', f'{y_rect[:2]} {y_rect[2:]}'
 
+
+def _get_meters_from_rectangular_coords(x: str, y: str) -> tuple[int, int]:
+    return int(x[-3:]), int(y[-3:])
+
+
+def _get_quadrant_from_rectangular_coords(x: str, y: str) -> tuple[str, str]:
+    return x[:2], y[:2]
+
+
+def convert_to_snail_4_coords(x_rect: str, y_rect: str) -> str:
+    x_, y_ = _get_quadrant_from_rectangular_coords(x_rect, y_rect)
+    x_meters, y_meters = _get_meters_from_rectangular_coords(x_rect, y_rect)
+    if x_meters >= 500:
+        if y_meters >= 500:
+            return f'{x_}{y_}-Б'
+        return f'{x_}{y_}-А'
+    if y_meters <= 500:
+        return f'{x_}{y_}-В'
+    return f'{x_}{y_}-Г'
+
+
+def convert_to_snail_9_coords(x_rect: str, y_rect: str) -> str:
+    x_, y_ = _get_quadrant_from_rectangular_coords(x_rect, y_rect)
+    x_meters, y_meters = _get_meters_from_rectangular_coords(x_rect, y_rect)
+    if x_meters < 333:
+        if y_meters < 333:
+            return f'{x_}{y_}-7'
+        elif y_meters < 666:
+            return f'{x_}{y_}-6'
+        return f'{x_}{y_}-5'
+
+    if x_meters < 666:
+        if y_meters < 333:
+            return f'{x_}{y_}-8'
+        elif y_meters < 666:
+            return f'{x_}{y_}-9'
+        return f'{x_}{y_}-4'
+
+    if y_meters < 333:
+        return f'{x_}{y_}-1'
+    elif y_meters < 666:
+        return f'{x_}{y_}-2'
+    return f'{x_}{y_}-3'
 
 def get_coordinates(point: Coordinates) -> html.Div:
     lat_deg, lat_min, lat_sec = decimal_to_dms(point.latitude)
@@ -61,5 +106,9 @@ def get_coordinates(point: Coordinates) -> html.Div:
             html.Div(html.Strong("Сокращенные прямоугольные координаты объекта:"), className='mt-2'),
             html.Div(f"Х={x_rect}"),
             html.Div(f"Y={y_rect}"),
+            html.Div(html.Strong("Целеуказание по улитке (точность - 1/4 квадрата):"), className='mt-2'),
+            html.Div(f'{convert_to_snail_4_coords(x_rect, y_rect)}'),
+            html.Div(html.Strong("Целеуказание по улитке (точность - 1/9 квадрата):"), className='mt-2'),
+            html.Div(f'{convert_to_snail_9_coords(x_rect, y_rect)}'),
         ]
     )
