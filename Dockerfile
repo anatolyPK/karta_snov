@@ -6,7 +6,7 @@ COPY pyproject.toml poetry.lock* ./
 
 RUN pip install --no-cache-dir poetry
 
-RUN poetry install --no-dev
+RUN poetry install
 
 COPY . .
 
