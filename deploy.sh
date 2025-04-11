@@ -9,6 +9,8 @@ git pull
 echo "Сборка нового образа..."
 docker build -t karta-snov .
 
+docker rm karta-snov-container
+
 echo "Запуск нового контейнера..."
 docker run -d --rm -p 8050:8050 --name karta-snov-container karta-snov
 
