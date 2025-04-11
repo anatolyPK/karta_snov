@@ -119,11 +119,21 @@ footer = html.Div(
                     [
                         html.Span(
                             "Нашли ошибку? Напишите мне об этом!",
-                            className="mb-3 mb-md-0 text-body-secondary align-items-center"
+                            className="mb-2 text-body-secondary align-items-center"
+                        ),
+                        html.Div(
+                            html.A(
+                                "Поблагодарить автора",
+                                href="https://boosty.to/serff09/donate",
+                                target="_blank",
+                                className="text-decoration-none text-body-secondary d-block"
+                            ),
+                            className="text-center"
                         )
                     ],
-                    className='col-md-4 d-flex align-items-center'
+                    className='col-md-4 d-flex flex-column align-items-center'
                 ),
+
                 color_mode_switch,
                 html.Ul(
                     [
