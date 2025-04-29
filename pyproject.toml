@@ -13,6 +13,7 @@ dash-bootstrap-components = "^1.6.0"
 pandas = "^2.2.3"
 dash-leaflet = "^1.0.15"
 gunicorn = "^23.0.0"
+dash-core-components = "^2.0.0"
 
 
 [build-system]
